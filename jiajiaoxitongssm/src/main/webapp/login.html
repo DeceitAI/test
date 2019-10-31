@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+		<meta charset="utf-8">
+		<title>登录界面</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+	     <link rel="shortcut icon" href="#" />
+        <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="js/common.js" ></script>
+	</head>
+<script type="text/javascript">
+
+        //登录
+        function Login() {
+            var s_account = $("#s_account").val();
+            var s_password = $("#s_password").val();
+            var data = {
+                "s_account":s_account,
+                "s_password":s_password
+            }
+            $.ajax({
+                type: "post",
+                url: "system/login",
+                data: JSON.stringify(data),
+                dataType: "json", //返回数据类型
+                contentType: 'application/json',
+                success: function (data) {
+                    if ("success" == data.type) {
+                        window.parent.location.href = "/system/index";
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+
+            });
+        }
+</script>
+<body>
+		<div class="wrap login_wrap">
+			<div class="content">
+				<div class="logo"></div>
+				<div class="login_box">	
+					
+					<div class="login_form">
+						<div class="login_title">
+							登录
+						</div>
+						<form action="#" method="post">
+							
+							<div class="form_text_ipt">
+								<input name="s_account" id="s_account" type="text" placeholder="账号">
+							</div>
+							<div class="ececk_warning">
+								<!--<span>手机号/邮箱不能为空</span></div>-->
+							</div>
+							<div class="form_text_ipt">
+								<input name="s_password" id="s_password" type="password" placeholder="密码">
+							</div>
+							<div class="ececk_warning">
+								<!--<span>密码不能为空</span></div>-->
+							</div>
+							<div class="form_check_ipt">
+								<div class="left check_left">
+									<label><input name="" type="checkbox"> 下次自动登录</label>
+								</div>
+								<div class="right check_right">
+									<a href="#">忘记密码</a>
+								</div>
+							</div>
+							<div class="form_btn">
+								<button type="button" id="login" onclick="Login()">登录</button>
+							</div>
+							<div class="form_reg_btn">
+								<span>还没有帐号？</span><a href="UserRegist.UserRegist.html">马上注册</a>
+							</div>
+						</form>
+						<div class="other_login">
+							<div class="left other_left">
+								<span>其它登录方式</span>
+							</div>
+							<div class="right other_right">
+								<a href="#"><i class="fa fa-qq fa-2x"></i></a>
+								<a href="#"><i class="fa fa-weixin fa-2x"></i></a>
+								<a href="#"><i class="fa fa-weibo fa-2x"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div style="text-align:center;">
+</div>
+	</body>
+</html>

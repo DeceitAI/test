@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.lan.mapper.StudentMapper">
+
+    <!-- 学生登录 -->
+    <select id="login" resultType="student" parameterType="String">
+        SELECT * FROM t_student WHERE s_account = #{s_account} and s_password = #{s_password}
+    </select>
+    <!-- 学生注册 -->
+    <update id="register" parameterType="Student">
+  		insert into t_student(s_account,s_password,s_name,s_sex,s_school,s_address,s_age,s_class,s_image,s_phone)
+  		values(#{s_account},#{s_password},null,null,null,null,null,null,null,null)
+  	</update>
+
+</mapper>
