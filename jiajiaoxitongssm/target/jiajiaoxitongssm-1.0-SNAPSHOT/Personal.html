@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <title>HOME</title>
+  <!-- Meta-Tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="keywords" content=""/>
+    <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+  <script>
+    addEventListener("load", function () {
+      setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+      window.scrollTo(0, 1);
+    }
+  </script>
+  <!-- //Meta-Tags -->
+  <!-- Stylesheets -->
+  <link href="/css/style.css" rel='stylesheet' type='text/css' />
+  <!--// Stylesheets -->
+  <!--fonts-->
+  <!-- title -->
+	<link href="http://fonts.googleapis.com/css?family=Abhaya+Libre:400,500,600,700,800" rel="stylesheet">
+  <!-- body -->
+  <!--//fonts-->
+</head>
+
+<script type="text/javascript">
+
+  //登录
+  $(document).ready(function() {
+
+    $.ajax({
+      type: "get",
+      url: "student/findBys_account",
+      dataType: "json", //返回数据类型
+      contentType: 'application/json',
+      success: function (data) {
+          $("#s_name").val(data.s_name);
+          $("#s_age").val(data.s_age);
+          $("#s_sex").val(data.s_sex);
+          $("#s_phone").val(data.s_phone);
+          $("#s_school").val(data.s_school);
+          $("#s_class").val(data.s_class);
+          $("#s_address").val(data.s_address);
+      }
+
+    });
+  })
+</script>
+
+<body>
+  <header>
+    <h1>个人中心</h1>
+  </header>
+  <div class="w3ls-contact">
+
+    <!-- form starts here -->
+    <form action="#" method="post">
+      <div id="update">
+      <div class="agile-field-txt">
+        <div class="mr_agilemain">
+          <div class="left-wthree">
+            <input type="text" name="s_name" placeholder=" " id="s_name" required>
+            <label class="bot_w3">
+              姓名</label>
+          </div>
+          <div class="left-wthree">
+            <input type="text" name="s_age" placeholder=" " id="s_age" required>
+            <label class="bot_w3">
+              年龄</label>
+          </div>
+           <div class="left-wthree">
+            <input type="text" name="s_sex" placeholder=" " id="s_sex" required>
+            <label class="bot_w3">
+              性别</label>
+          </div>
+        </div>
+      </div>
+      <div class="agile-field-txt">
+        <label>
+          联系电话</label>
+        <input type="text" name="s_phone" placeholder=" " id="s_phone" required />
+      </div>
+      <div class="agile-field-txt">
+        <label>
+         学校</label>
+		 <textarea name="s_school" placeholder="请输入您的学校" id="s_school" required></textarea>
+      </div>
+          <div class="agile-field-txt">
+              <label>
+                  年级</label>
+              <textarea name="s_class" placeholder="请输入您的年级" id="s_class" required></textarea>
+          </div>
+      <div class="agile-field-txt">
+        <label>
+          地址</label>
+         <textarea name="s_address" placeholder="请输入您的地址" id="s_address" required></textarea>
+      </div>
+      <div class="w3ls-contact  w3l-sub">
+        <input type="button" value="更新" onclick="window.location.href = 'update.html'">
+      </div>
+      <div class="w3ls-contact  w3l-sub">
+        <input type="button" value="返回订单" onclick="window.location.href = 'order.html'">
+      </div>
+<div class="w3ls-contact  w3l-sub">
+        <input type="button" value="返回" onclick="window.location.href = 'welcome.html'">
+      </div>
+    </form>
+  </div>
+  <!-- //form ends here -->
+</body>
+<!-- //Body -->
+
+</html>

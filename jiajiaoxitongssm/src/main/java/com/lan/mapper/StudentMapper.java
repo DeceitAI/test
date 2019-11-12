@@ -16,4 +16,17 @@ public interface StudentMapper {
      */
     public int register(Student student);
 
+    /**
+     * 根据学生账号信息完善
+     */
+    public int update(Student student);
+
+    /**
+     * 根据学生账号查询用户个人信息
+     */
+    public Student findBys_account(String s_account);
+
+
+
+
 }
