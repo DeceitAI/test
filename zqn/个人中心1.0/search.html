@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <title>HOME</title>
+  <!-- Meta-Tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="keywords" content=""/>
+
+  <script>
+    addEventListener("load", function () {
+      setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+      window.scrollTo(0, 1);
+    }
+  </script>
+  <!-- //Meta-Tags -->
+  <!-- Stylesheets -->
+  <link href="css/style.css" rel='stylesheet' type='text/css' />
+  <!--// Stylesheets -->
+  <!--fonts-->
+  <!-- title -->
+	<link href="http://fonts.googleapis.com/css?family=Abhaya+Libre:400,500,600,700,800" rel="stylesheet">
+  <!-- body -->
+  <!--//fonts-->
+</head>
+
+<<<<<<< HEAD:jiajiaoxitongssm/target/jiajiaoxitongssm-1.0-SNAPSHOT/Personal.html
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $.ajax({
+      type: "get",
+      url: "student/findBys_account",
+      dataType: "json", //返回数据类型
+      contentType: 'application/json',
+      success: function (data) {
+          $("#s_name").val(data.s_name);
+          $("#s_age").val(data.s_age);
+          $("#s_sex").val(data.s_sex);
+          $("#s_phone").val(data.s_phone);
+          $("#s_school").val(data.s_school);
+          $("#s_class").val(data.s_class);
+          $("#s_address").val(data.s_address);
+      }
+
+    });
+  })
+</script>
+
+=======
+>>>>>>> 155128394dc875407a427e80f2321e8cd94c2383:zqn/个人中心1.0/search.html
+<body>
+  <header>
+    <h1>个人中心</h1>
+  </header>
+  <div class="w3ls-contact">
+
+    <!-- form starts here -->
+    <form action="#" method="post">
+      <div class="agile-field-txt">
+        <div class="mr_agilemain">
+          <div class="left-wthree">
+            <input type="text" name="name" placeholder=" " required>
+            <label class="bot_w3">
+              姓名</label>
+          </div>
+          <div class="left-wthree">
+            <input type="text" name="name" placeholder=" " required>
+            <label class="bot_w3">
+              年龄</label>
+          </div>
+           <div class="left-wthree">
+            <input type="text" name="name" placeholder=" " required>
+            <label class="bot_w3">
+              性别</label>
+          </div>
+        </div>
+      </div>
+      <div class="agile-field-txt">
+        <label>
+          联系电话</label>
+        <input type="text" name="name" placeholder=" " required />
+      </div>
+      <div class="agile-field-txt">
+        <label>
+         学校、年级</label>
+		 <textarea name="Comments" placeholder="Street Address or ZIP code" required></textarea>
+      </div>
+      <div class="agile-field-txt">
+        <label>
+          地址</label>
+         <textarea name="Comments" placeholder="Street Address or ZIP code" required></textarea>
+      </div>
+      <div class="w3ls-contact  w3l-sub">
+        <input type="button" value="更新" onclick="window.location.href = 'update.html'">
+      </div>
+<div class="w3ls-contact  w3l-sub">
+        <input type="button" value="返回" onclick="window.location.href = 'welcome.html'">
+      </div>
+    </form>
+  </div>
+  <!-- //form ends here -->
+</body>
+<!-- //Body -->
+
+</html>
