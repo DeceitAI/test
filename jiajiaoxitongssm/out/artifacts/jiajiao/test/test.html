@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+   <!-- <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>-->
+<script src="https://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+ <script type="text/javascript" src="../js/common.js" ></script>
+
+</head>
+<script type="text/javascript">
+
+    //登录
+    function searchTeacher() {
+       /* var s_account = $("#s_account").val();
+        var s_password = $("#s_password").val();
+        var data = {
+            "s_account":s_account,
+            "s_password":s_password
+        }*/
+        console.log("111111");
+        $.ajax({
+            type: "GET",
+            url: "../teacher/search",
+            dataType: "json", //返回数据类型
+            contentType: 'application/json',
+            success: function (data) {
+                alert(data.msg);
+                console.log(data)
+                /*
+                if ("success" == data.type) {
+                    console.log("11111"+data);
+                    window.parent.location.href = "html/test.html";
+                } else {
+                    alert(data.msg);
+                }*/
+            }
+
+        });
+    }
+</script>
+<body>
+<p>跳转成功</p>
+
+<button type="button" id="login" onclick="searchTeacher()">登录</button>
+</body>
+</html>

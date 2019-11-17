@@ -10,30 +10,7 @@
     <link rel="shortcut icon" href="#" />
     <script type="text/javascript" src="../../js/jquery.js"></script>
     <script type="text/javascript" src="../../js/main.js"></script>
-    <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
 </head>
-
-<script type="text/javascript">
-
-    //登录
-    $(document).ready(function() {
-
-        $.ajax({
-            type: "post",
-            url: "LoginStudent",
-            dataType: "json", //返回数据类型
-            contentType: 'application/json',
-            success: function (data) {
-                $(".welcome")[0].innerHTML=data+"欢迎您!";
-
-            },
-            error:function (data) {
-                alert("系统出错")
-            }
-
-        })
-    })
-</script>
 <body>
 
 <header class="trasparent_nav">
@@ -43,10 +20,8 @@
         </div>
         <nav>
             <ul>
-                <li class="welcome">欢迎登录</a></li>
-<!--                <li><a href="index.html">注册</a></li>-->
-<!--                <li><a href="login.html">登录</a></li>-->
-                <li><a href="/login_out">注销</a></li>
+                <li><a href="login.html">登录</a></li>
+                <li><a href="UserRegister.html">注册</a></li>
             </ul>
         </nav>
     </div>
@@ -63,7 +38,7 @@
     </div>
     <ul>
         <li>
-            <a href="FindTeacher.html"><img class="s_icons" src="../../img/s1.png"/></a>
+            <a href="2.html"><img class="s_icons" src="../../img/s1.png"/></a>
             <h3>找老师</h3>
             <p>在这里有很多大学生老师供您选择，总有一款适合你！</p>
         </li>

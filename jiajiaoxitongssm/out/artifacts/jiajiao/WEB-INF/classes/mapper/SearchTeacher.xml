@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lan.mapper.SearchTeacherMapper">
+    <resultMap id="SearchTeacher" type="com.lan.model.Teacher">
+    <!--  主表 - 主键  column=表属性 property = 对应的实体类属性 -->
+        <id column="t_account" property="t_account"/>
+        <result column="t_name" property="t_name"/>
+        <result column="t_age" property="t_age"/>
+        <result column="t_sex" property="t_sex"/>
+        <result column="t_shcool" property="t_shcool"/>
+        <result column="t_image " property="t_image"/>
+        <result column="t_workaddress" property="t_workaddress"/>
+  
+     <!--   从表一对多-->
+     <!--   <collection property="pojo的集合属性" ofType="集合中的pojo对象">-->
+       <collection property="teacherHope" ofType="com.lan.model.TeacherHope" >
+           <id column="t_qiwangID" property="t_qiwangID"/>
+           <result column="t_kemu" property="t_kemu"/>
+           <result column="t_class" property="t_class"/>
+           <result column="t_money" property="t_money"/>
+           <result column="t_worktime" property="t_worktime"/>
+
+       </collection>
+        
+    </resultMap>
+<select id="zhaoTeacher" resultMap="SearchTeacher">
+SELECT t_teacher.*,t_qiwang.t_kemu,t_qiwang.t_class,t_qiwang.t_money,t_qiwang.t_worktime
+  FROM t_qiwang,t_teacher
+  WHERE t_teacher.t_account=t_qiwang.t_account;
+
+</select>
+
+</mapper>
+

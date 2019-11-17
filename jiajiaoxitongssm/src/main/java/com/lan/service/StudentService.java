@@ -18,18 +18,4 @@ public interface StudentService {
      */
     public int register(Student student);
 
-    /**
-     * 学生信息完善
-     * @param student
-     * @return
-     */
-    public int update(Student student);
-
-    /**
-     * 根据学生账号查询学生个人信息
-     * @param s_account
-     * @return
-     */
-    public Student findBys_account(String s_account);
-
 }

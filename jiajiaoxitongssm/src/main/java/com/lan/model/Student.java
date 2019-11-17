@@ -1,6 +1,12 @@
 package com.lan.model;
 
-public class Student {
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import java.io.Serializable;
+import java.util.List;
+
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+public class Student implements Serializable {
     /**
      CREATE TABLE `t_student` (
      `s_account` varchar(20) NOT NULL,
@@ -26,6 +32,17 @@ public class Student {
     private String s_class;
     private String s_phone;
     private String s_image;
+    //订单表
+    private List<Order> order;
+
+
+    public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
+    }
 
     public String getS_account() {
         return s_account;

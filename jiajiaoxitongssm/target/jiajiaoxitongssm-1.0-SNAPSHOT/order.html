@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的订单页面</title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/main1.css">
+<script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var orderSize=2;
+        $.ajax({
+            type: "get",
+            url: "order/student",
+            dataType: "json", //返回数据类型
+            //data:{},
+            /*data: JSON.stringify(data),*/
+            contentType: "application/json;charset=UTF-8",
+            success: function (data) {
+                console.log(data);
+                alert("ds");
+                $("#s_account").text(data.dataOrder.s_account);
+                $("#s_name").text(data.dataOrder.s_name);
+                //for (var i=0;i<1;i++) {
+                for (var i=0;i<data.dataOrder.order.length;i++) {
+                    $("#order").append(data.dataOrder.order[i].order_id+'<br>');
+                    $("#order").append(data.dataOrder.order[i].teacher.t_account+'<br>');
+                    $("#order").append(data.dataOrder.order[i].teacher.t_name+'<br>');
+                    $("#order").append(data.dataOrder.order[i].status+'<br>');
+                }
+
+
+            }
+        });
+    })
+</script>
+
+<body background="img/3.jpg">
+
+<div class="con_wrap">
+
+    <h1 style="text-align:center;font-weight: 700;">老师详情</h1>
+
+
+    <div class="myinfo">
+        <table>
+            <tbody>
+            <tr>
+                <td rowspan="6">
+                    <img src="img/w4.png">
+                </td>
+                <td>姓名 | <i id="s_account"></i></td>
+                <td>年龄 | <i id="s_name"></i></td>
+            </tr>
+            <tr>
+                <td>性别 | <i id="order"></i></td>
+                <td>学校 | <i id="t_school"></i></td>
+            </tr>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

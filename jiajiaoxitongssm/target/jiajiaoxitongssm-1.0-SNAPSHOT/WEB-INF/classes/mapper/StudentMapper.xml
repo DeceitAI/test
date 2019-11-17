@@ -9,19 +9,9 @@
         SELECT * FROM t_student WHERE s_account = #{s_account} and s_password = #{s_password}
     </select>
     <!-- 学生注册 -->
-    <insert id="register" parameterType="Student">
-  		insert into t_student(s_account,s_password,s_name,s_class,s_school)
-  		values(#{s_account},#{s_password},#{s_name},#{s_class},#{s_school})
-  	</insert>
-
-    <!--学生信息完善-->
-    <update id="update" parameterType="Student">
-  		update t_student set s_name = #{s_name},s_age=#{s_age},s_sex=#{s_sex},s_phone = #{s_phone},s_school=#{s_school},s_class = #{s_class},s_address = #{s_address},s_password = #{s_password} where s_account = #{s_account}
+    <update id="register" parameterType="Student">
+  		insert into t_student(s_account,s_password,s_name,s_sex,s_school,s_address,s_age,s_class,s_image,s_phone)
+  		values(#{s_account},#{s_password},null,null,null,null,null,null,null,null)
   	</update>
-
-    <!--根据学生账号查询学生个人信-->
-    <select id="findBys_account" resultType="student" parameterType="String">
-        SELECT * FROM t_student WHERE s_account = #{s_account}
-    </select>
 
 </mapper>

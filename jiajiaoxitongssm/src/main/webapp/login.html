@@ -4,16 +4,16 @@
 <head>
 		<meta charset="utf-8">
 		<title>登录界面</title>
-		<link rel="stylesheet" href="../../css/reset.css" />
-		<link rel="stylesheet" href="../../css/common.css" />
-		<link rel="stylesheet" href="../../css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
 	     <link rel="shortcut icon" href="#" />
         <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
-        <script type="text/javascript" src="../../js/common.js" ></script>
+        <script type="text/javascript" src="js/common.js" ></script>
 	</head>
 <script type="text/javascript">
 
-        //学生登录
+        //登录
         function Login() {
             var s_account = $("#s_account").val();
             var s_password = $("#s_password").val();
@@ -23,13 +23,13 @@
             }
             $.ajax({
                 type: "post",
-                url: "login",
+                url: "system/login",
                 data: JSON.stringify(data),
                 dataType: "json", //返回数据类型
                 contentType: 'application/json',
                 success: function (data) {
                     if ("success" == data.type) {
-                        window.parent.location.href = "/welcome";
+                        window.parent.location.href = "/system/index";
                     } else {
                         alert(data.msg);
                     }
@@ -37,32 +37,6 @@
 
             });
         }
-</script>
-<script type="text/javascript">
-
-	//老师登录
-	function TeacherLogin() {
-		var t_account = $("#s_account").val();
-		var t_password = $("#s_password").val();
-		var data = {
-			"t_account":t_account,
-			"t_password":t_password
-		}
-		$.ajax({
-			type: "post",
-			url: "TeacherLogin",
-			data: JSON.stringify(data),
-			dataType: "json", //返回数据类型
-			contentType: 'application/json',
-			success: function (data) {
-				window.parent.location.href = "/welcome";
-			},
-			error:function (data) {
-				alert("登陆失败")
-			}
-
-		})
-	}
 </script>
 <body>
 		<div class="wrap login_wrap">
@@ -97,16 +71,13 @@
 								</div>
 							</div>
 							<div class="form_btn">
-								<button type="button" id="login" onclick="Login()">学生登录</button>
-							</div>
-							<div class="form_btn">
-								<button type="button" id="Teacherlogin" onclick="TeacherLogin()">老师登录</button>
+								<button type="button" id="login" onclick="Login()">登录</button>
 							</div>
 							<div class="form_reg_btn">
 								<span>还没有帐号？</span><a href="UserRegist.UserRegist.html">马上注册</a>
 							</div>
 						</form>
-						<!--<div class="other_login">
+						<div class="other_login">
 							<div class="left other_left">
 								<span>其它登录方式</span>
 							</div>
@@ -115,7 +86,7 @@
 								<a href="#"><i class="fa fa-weixin fa-2x"></i></a>
 								<a href="#"><i class="fa fa-weibo fa-2x"></i></a>
 							</div>
-						</div>-->
+						</div>
 					</div>
 				</div>
 
