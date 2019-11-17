@@ -3,18 +3,22 @@ package com.lan.controller;
 import com.lan.common.ResultData;
 import com.lan.model.Teacher;
 import com.lan.service.TeacherService;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 老师信息管理
@@ -110,5 +114,35 @@ public class TeacherController {
     /**
      * 老师图片上传
      */
+    @RequestMapping(value = "/saveImage",method =RequestMethod.POST )
+    @ResponseBody
+    public Teacher saveImage(HttpSession session,Teacher teacher,
+                                         @RequestParam(value = "filename", required = false)	MultipartFile filename
+    )throws IOException {
+        Teacher sessionTeacher=(Teacher) session.getAttribute("sessionTeacher");
+        String t_account=sessionTeacher.getT_account();
+        logger.debug("********************"+t_account);
+        System.out.println(t_account);
+        teacher.setT_account(t_account);
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        String filename2 = filename.getOriginalFilename();
 
+        if (!filename2.isEmpty()) {
+            // FileUtils 可以做文件流的拷贝 和 操作
+            FileUtils.copyInputStreamToFile(
+                    filename.getInputStream(),
+                    new File("D:\\javaeeDaZuoYe\\images",
+                            filename.getOriginalFilename()));
+            //把图片路径保存到用户信息里面
+            resultMap.put("img", "/images/"+filename.getOriginalFilename());
+            resultMap.put("t_account", t_account);
+            teacherService.SaveImage(teacher);
+            resultMap.put("key", "success");
+            resultMap.put("teacher",teacher);
+            return teacher;
+        }else{
+            resultMap.put("key", "error");
+            return teacher;
+        }
+    }
 }

@@ -50,7 +50,7 @@ public class TeacherServiceimpl implements TeacherService {
     /**
      * 老师图片上传
      */
-    public String SaveImage(String image){
-        return teacherMapper.SaveImage(image);
+    public int SaveImage(Teacher teacher){
+        return teacherMapper.SaveImage(teacher);
     }
 }

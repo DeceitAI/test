@@ -1,5 +1,7 @@
 package com.lan.model;
 
+import java.util.List;
+
 public class Student {
     /**
      CREATE TABLE `t_student` (
@@ -26,6 +28,16 @@ public class Student {
     private String s_class;
     private String s_phone;
     private String s_image;
+
+    private List<Order> order;
+
+    public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
+    }
 
     public String getS_account() {
         return s_account;

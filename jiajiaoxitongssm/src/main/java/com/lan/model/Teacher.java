@@ -1,5 +1,7 @@
 package com.lan.model;
 
+import java.util.List;
+
 // `t_account` varchar(20) NOT NULL,
 //  `t_password` varchar(20) DEFAULT NULL,
 //  `t_name` varchar(20) DEFAULT NULL,
@@ -20,6 +22,28 @@ public class Teacher {
     private String t_image;
     private String t_phone;
     private String t_workaddress;
+    //老师期望表
+    private List<TeacherHope> teacherHope;
+
+    public List<TeacherHope> getTeacherHope() {
+        return teacherHope;
+    }
+
+    public void setTeacherHope(List<TeacherHope> teacherHope) {
+        this.teacherHope = teacherHope;
+    }
+
+    public List<Student> getStudent() {
+        return student;
+    }
+
+    public void setStudent(List<Student> student) {
+        this.student = student;
+    }
+
+    /*订单表*/
+    public List<Student> student;
+
 
     public String getT_account() {
         return t_account;
