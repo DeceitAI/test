@@ -54,12 +54,11 @@ public class OrderController {
     /**
      * 保存订单信息
      */
-    @RequestMapping(value = "SaveOrder",method = RequestMethod.POST)
-    public Order SaveOrder(@RequestBody Order order){
+    @RequestMapping(value = "/SaveOrder",method = RequestMethod.POST)
+    public void SaveOrder(@RequestBody Order order){
         System.out.println(order.getOrder_id());
-        order=orderService.SaveOrder(order);
+        orderService.SaveOrder(order);
         ResultData.success(order);
-        return order;
     }
 
 

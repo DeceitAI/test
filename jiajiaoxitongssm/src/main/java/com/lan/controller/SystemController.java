@@ -40,6 +40,11 @@ public class SystemController {
         return "TeacherDetail";
     }
 
+    @RequestMapping(value = "/AlipayJSP/index")
+    public String AlipayJSP(){
+        return "AlipayJSP/index";
+    }
+
     @RequestMapping(value = "/FteacherDetail")
     public String FteacherDetail(){
         return "FteacherDetail";
@@ -93,7 +98,7 @@ public class SystemController {
         }
         //存入session
         request.getSession().setAttribute("sessionStudent", student);
-
+        map.put("s_account",s_account);
         map.put("type","success");
 
         return map;

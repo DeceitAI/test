@@ -12,5 +12,5 @@ public interface OrderService {
     /**
      * 保存订单信息
      */
-    public Order SaveOrder(Order order);
+    public void SaveOrder(Order order);
 }

@@ -6,6 +6,7 @@
     <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>--><!--
     <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>-->
     <script src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
 <style>
     .qjj .qjj_r .xyk .z_jyk ul li .z_jyk_t {
@@ -128,12 +129,14 @@
             var kemu1 = "";
             console.log("i="+i);
 
+
             for (var j = 0; j <data[i].teacherHope.length;j++) {
                 var kemu = "";
                 kemu = data[i].teacherHope[j].t_kemu;
                 kemu1 += kemu + " ";
                 console.log("j="+j);
             }
+            var t_account1=data[i].t_account;
             var tr =
                 '<li>'
                 + '<div class="z_jyk_t fl">'
@@ -146,7 +149,8 @@
                 '<p>科目：<i>' + kemu1 + '</i></p>' +
                 '<p>性别：<i>' + data[i].t_sex + '</i></p>' +
                 '<p>年龄：<i>' + data[i].t_age + '</i></p>' +
-                "<td><a href='login.html'>" + "查看详情" + "</a></td>" +
+
+                "<td> <input type='button' name='find' value='查看详情' onclick='Find(\"" + t_account1 + "\")'/> "+ "</td>" +
                 '</div>'
                 + "</li><br><br>";
             trs += tr;
@@ -203,6 +207,7 @@
             for (var i = (pageIndex-1)*pageSize,xunhuan= 0;xunhuan < le-2; i++,xunhuan++) {
 
                 var kemu1 = "";
+                var t_account1=data[i].t_account;
 
                 for (var j = 0; j < data[i].teacherHope.length;j++) {
                     var kemu = "";
@@ -231,7 +236,8 @@
                     '<p>科目：<i>' + kemu1/*data[0].teacherHope[0].t_kemu*/ + '</i></p>' +
                     '<p>性别：<i>' + data[i].t_sex + '</i></p>' +
                     '<p>年龄：<i>' + data[i].t_age + '</i></p>' +
-                    "<td><a href='FteacherDetail.html'>" + "查看详情" + "</a></td>"
+
+                    "<td> <input type='button' name='find' value='查看详情' onclick='Find(\"" + t_account1 + "\")'/> "+ "</td>"
                     + '</div>'
                     + "</li><br></<br>"
 
@@ -301,6 +307,12 @@
             queryForPages();
         });
     });
+    function Find(t_account) {
+        $.cookie("t_account",t_account,{path:'/'});
+        console.log(t_account);
+        window.parent.location.href = "/FteacherDetail.html";
+
+    }
 </script>
 <style>
     * {

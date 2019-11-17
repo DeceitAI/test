@@ -9,6 +9,7 @@
 		<!--<link rel="stylesheet" href="../../css/font-awesome.min.css" />-->
 	     <link rel="shortcut icon" href="#" />
         <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script type="text/javascript" src="../../js/common.js" ></script>
 	</head>
 <script type="text/javascript">
@@ -29,6 +30,9 @@
                 contentType: 'application/json',
                 success: function (data) {
                     if ("success" == data.type) {
+						var a=$.cookie("s_account",data.s_account,{path:'/'});
+						alert(data.s_account);
+						alert("1111111"+a);
                         window.parent.location.href = "/welcome";
                     } else {
                         alert(data.msg);

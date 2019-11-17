@@ -26,7 +26,7 @@ select student_order.order_id,t_student.s_account,t_student.s_name,student_order
     </select>
     <!--保存订单信息-->
     <insert id="SaveOrder" parameterType="Order">
-        insert into order(order_id,s_account,t_account,status)
+        insert into student_order(order_id,s_account,t_account,status)
   		values(#{order_id},#{s_account},#{t_account},#{status})
     </insert>
 

@@ -12,6 +12,6 @@ public interface OrderMapper {
     /**
      * 保存订单信息
      */
-    public Order SaveOrder(Order order);
+    public void SaveOrder(Order order);
 }
 

@@ -112,6 +112,23 @@ public class TeacherController {
     }
 
     /**
+     * 根据老师cookie账号查询老师个人信息
+     */
+    @RequestMapping(value = "/FteacherDetail", method = RequestMethod.POST)
+    @ResponseBody
+    public Teacher FteacherDetail(@RequestBody Teacher teacher ) {
+        String t_account=teacher.getT_account();
+        System.out.println(t_account);
+        logger.debug("---------------------"+t_account);
+        Teacher teacher1=teacherService.findByt_account(t_account);
+        /*Map<String,String> map = new HashMap<>();*/
+        if(teacher1!=null){
+            ResultData.success(teacher1);
+        }
+        return teacher1;
+    }
+
+    /**
      * 老师图片上传
      */
     @RequestMapping(value = "/saveImage",method =RequestMethod.POST )

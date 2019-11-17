@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
      * @param order
      * @return
      */
-    public Order SaveOrder(Order order){
-        return orderMapper.SaveOrder(order);
+    public void SaveOrder(Order order){
+         orderMapper.SaveOrder(order);
     }
 }

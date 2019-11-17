@@ -5,17 +5,23 @@
     <title>老师详情页面</title>
     <link rel="stylesheet" type="text/css" href="css/main1.css">
     <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
 
 </head>
 
 <script type="text/javascript">
 
     $(document).ready(function() {
-
+        var t_account=$.cookie("t_account");
+        console.log(t_account);
+        var data={
+            "t_account":t_account
+        };
         $.ajax({
-            type: "get",
-            url: "teacher/findByt_account",
+            type: "post",
+            url: "teacher/FteacherDetail",
             dataType: "json", //返回数据类型
+            data: JSON.stringify(data),
             contentType: 'application/json',
             success: function (data) {
                 $("#t_age").text(data.t_age);
@@ -40,6 +46,7 @@
             <tbody>
             <td colspan="3">
                 <a href="FindTeacher.html">返回 >></a>
+                <a href="ConfirmOrder.html">下单 >></a>
 <!--                <a href="teachersearch.html">个人主页 >> </a>-->
                 <!--            <a href="FindTeacher.html">找老师 </a><br>-->
             </td>
