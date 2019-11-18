@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +33,21 @@ public class SystemController {
     @RequestMapping(value = "/welcome")
     public String index(){
         return "welcome";
+    }
+
+    @RequestMapping(value = "/TeacherDetail")
+    public String TeacherDetail(){
+        return "TeacherDetail";
+    }
+
+    @RequestMapping(value = "/AlipayJSP/index")
+    public String AlipayJSP(){
+        return "AlipayJSP/index";
+    }
+
+    @RequestMapping(value = "/FteacherDetail")
+    public String FteacherDetail(){
+        return "FteacherDetail";
     }
 
     /**
@@ -84,7 +98,7 @@ public class SystemController {
         }
         //存入session
         request.getSession().setAttribute("sessionStudent", student);
-
+        map.put("s_account",s_account);
         map.put("type","success");
 
         return map;

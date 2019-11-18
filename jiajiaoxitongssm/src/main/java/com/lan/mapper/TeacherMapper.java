@@ -30,5 +30,5 @@ public interface TeacherMapper {
     /**
      * 老师图片上传
      */
-    public String SaveImage(String image);
+    public int SaveImage(Teacher teacher);
 }

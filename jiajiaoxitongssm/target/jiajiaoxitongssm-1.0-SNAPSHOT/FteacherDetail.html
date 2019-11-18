@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>老师详情页面</title>
+    <link rel="stylesheet" type="text/css" href="css/main1.css">
+    <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+</head>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var t_account=$.cookie("t_account");
+        console.log(t_account);
+        var data={
+            "t_account":t_account
+        };
+        $.ajax({
+            type: "post",
+            url: "teacher/FteacherDetail",
+            dataType: "json", //返回数据类型
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function (data) {
+                $("#t_age").text(data.t_age);
+                $("#t_name").text(data.t_name);
+                $("#t_sex").text(data.t_sex);
+                $("#t_school").text(data.t_school);
+                $("#t_phone").text(data.t_phone);
+                $("#t_workaddress").text(data.t_workaddress);
+            }
+        });
+    })
+</script>
+
+<body background="img/3.jpg">
+
+<div class="con_wrap">
+
+    <h1 style="text-align:center;font-weight: 700;">老师详情</h1>
+
+    <div class="myinfo">
+        <table>
+            <tbody>
+            <td colspan="3">
+                <a href="FindTeacher.html">返回 >></a>
+                <a href="ConfirmOrder.html">下单 >></a>
+<!--                <a href="teachersearch.html">个人主页 >> </a>-->
+                <!--            <a href="FindTeacher.html">找老师 </a><br>-->
+            </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="myinfo">
+        <table>
+            <tbody>
+            <tr>
+                <td rowspan="6">
+                    <img src="img/w4.png">
+                </td>
+                <td>姓名 | <i id="t_name"></i></td>
+                <td>年龄 | <i id="t_age"></i></td>
+            </tr>
+            <tr>
+                <td>性别 | <i id="t_sex"></i></td>
+                <td>学校 | <i id="t_school"></i></td>
+            </tr>
+            <tr>
+                <td>电话 | <i id="t_phone"></i></td>
+                <td>工作地址 | <i id="t_workaddress"></i></td>
+            </tr>
+
+            <td colspan="3">
+                <p>项目：</p><br>
+                <a href="http://www.1-yd.com/">1. 闻行一阅读（基于Amaze UI 查看网址：www.1-yd.com）</a><br>
+                <a>2. 中笕-汽车保养（基于Metronic的Bootstrap，内部项目，无法展示）</a><br><br>
+                <p>小作品 （查看网址：http://www.17sucai.com/boards/117475.html）</p><br>
+                <a href="http://www.17sucai.com/boards/117475.html">1. 手工皂（注：瀑布流本地没问题） </a>
+                <a href="http://www.17sucai.com/boards/117475.html">2. 个人主页 </a>
+                <a href="http://www.17sucai.com/boards/117475.html">3. 手工皂 </a><br>
+
+            </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

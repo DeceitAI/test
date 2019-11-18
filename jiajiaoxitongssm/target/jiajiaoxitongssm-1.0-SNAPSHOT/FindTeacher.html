@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>--><!--
+    <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>-->
+    <script src="js/jquery.js"></script>
+</head>
+<style>
+    .qjj .qjj_r .xyk .z_jyk ul li .z_jyk_t {
+        width: 125px;
+    }
+
+    .fl {
+        float: left;
+    }
+</style>
+<body>
+<div class="container">
+    <h2>找老师</h2>
+    <div class="qjj_r_t" style="border: 1px solid #ccc">
+        <a href="/welcome.html">网站首页 >></a>
+    </div>
+    <a href="/"><img style="width: 255px" src="http://img.zhishanshi.com/web/image/201906/1560159796261.jpg" alt="Logo"></a>
+    <div>
+        <table class="tb" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>id</th>
+                <th>姓 名</th>
+                <th>地 区</th>
+                <th>性 别</th>
+                <th>科 目</th>
+                <th>薪 水</th>
+            </tr>
+        </table>
+
+        <select id="t_sex">
+            <option value ="1">全部</option>
+            <option value ="man">男</option>
+            <option value ="woman">女</option>
+        </select>
+
+        <select id="t_class">
+            <option value ="1">全部</option>
+            <option value ="高中">高中</option>
+            <option value ="初中">初中</option>
+        </select>
+
+        <select id="t_kemu">
+            <option value ="1">全部</option>
+            <option value ="语文">语文</option>
+            <option value ="数学">数学</option>
+        </select>
+
+        <button id="search" value="搜索" onclick="">搜索</button>
+        <br><br>
+
+        <div id="d_body" class=".z_jyk">
+
+        </div>
+        <div class="page">
+            <button id="firstPage">首页</button>&#160;&#160;&#160;
+            <button id="previous">上一页</button>&#160;&#160;&#160;
+            第<input type="text" id="index" value="1" size="1">页&#160;&#160;&#160;
+            <button id="next">下一页</button>&#160;&#160;&#160;
+            <button id="last">尾页</button>
+            <div id="pageCount" style="display: inline-block"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    var pageSize = 5;//每页行数
+    var pageIndex = 1;//当前页
+    var totalPageCount = 0;//总页数
+    var totalCount = 0;//总记录数
+
+  /*  var data = {
+        "pageIndex": pageIndex,
+        "pageSize": pageSize
+
+    }*/
+    //jquery代码随着document加载完毕而加载
+    $("#search").click(function() {
+        var t_sex = $("#t_sex").val();//性別
+        var t_kemu = $("#t_kemu").val();//学校
+        var t_class = $("#t_class").val();//类似学校
+        var data = {
+
+            "t_sex": t_sex,
+            "t_kemu":t_kemu,
+            "t_class":t_class
+
+
+        }
+        $.ajax({
+            url: 'teacher/selectTeacher',
+
+            type: 'post',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            /*请检查上方contentType类型，如果想用springmvc @RequestBody注解做提交json字符串自动绑定到pojo入参时，
+        类型需要是"application/json;charset=UTF-8"，否则会抛"not supported"异常。
+*/
+            contentType: "application/json;charset=UTF-8",
+            /* data: "pageIndex=" + pageIndex + "&PageSize=" + pageSize,*/
+
+            success: function callbackFun(data) {
+                //清空数据??????????
+                /* clearDate();*/
+                console.log(data);
+                //查询数据
+                fillDiv(data);
+            }
+        });
+
+    });
+    function fillDiv(data) {
+
+
+        var changdu=Object.keys(data).length
+        var i = 0;
+        var trs = "";//不初始化字符串"",会默认"undefined"
+        var div = "";
+        for (var i = 0; i < changdu-1; i++) {
+            var kemu1 = "";
+            console.log("i="+i);
+
+            for (var j = 0; j <data[i].teacherHope.length;j++) {
+                var kemu = "";
+                kemu = data[i].teacherHope[j].t_kemu;
+                kemu1 += kemu + " ";
+                console.log("j="+j);
+            }
+            var tr =
+                '<li>'
+                + '<div class="z_jyk_t fl">'
+                + ' <img src="http://zhishanshi.com/static/pc/images/Demo_Big.jpg" alt="">'
+                + '</div>'
+                + '<div>' +
+                '<p>姓名：<i>' + data[i].t_name + '</i></p>' +
+                '<p>账号：<i>' + data[i].t_account + '</i></p>' +
+                '<p>就读/毕业高校：<i>' + data[i].t_workaddress + '</i></p>' +
+                '<p>科目：<i>' + kemu1 + '</i></p>' +
+                '<p>性别：<i>' + data[i].t_sex + '</i></p>' +
+                '<p>年龄：<i>' + data[i].t_age + '</i></p>' +
+                "<td><a href='login.html'>" + "查看详情" + "</a></td>" +
+                '</div>'
+                + "</li><br><br>";
+            trs += tr;
+            $("#d_body").html(trs);
+        }
+
+    }
+    $(document).ready(function() {
+        //分页查询
+
+        queryForPages();
+        function queryForPages() {
+            var data = {
+                "pageIndex": pageIndex,
+                "pageSize": pageSize,
+               /* "t_sex": t_sex,
+                "t_kemu":t_kemu,
+                "t_class":t_class*/
+
+
+            }
+            $.ajax({
+                url: 'teacher/search',
+
+                type: 'post',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                /*请检查上方contentType类型，如果想用springmvc @RequestBody注解做提交json字符串自动绑定到pojo入参时，
+            类型需要是"application/json;charset=UTF-8"，否则会抛"not supported"异常。
+    */
+                contentType: "application/json;charset=UTF-8",
+                /* data: "pageIndex=" + pageIndex + "&PageSize=" + pageSize,*/
+
+                success: function callbackFun(data) {
+                    //清空数据??????????
+                    /* clearDate();*/
+                    console.log(data);
+                    //查询数据
+                    fillTable(data);
+                }
+            });
+        }
+
+        //填充数据
+        function fillTable(data) {
+
+            var i = 0;
+            var trs = "";//不初始化字符串"",会默认"undefined"
+            var div = "";
+            var le=Object.keys(data).length
+            alert(data.msg);
+            totalPageCount=data.page.totalPageCount;
+            alert(Object.keys(data).length);
+            for (var i = (pageIndex-1)*pageSize,xunhuan= 0;xunhuan < le-2; i++,xunhuan++) {
+
+                var kemu1 = "";
+
+                for (var j = 0; j < data[i].teacherHope.length;j++) {
+                    var kemu = "";
+                    kemu = data[i].teacherHope[j].t_kemu;
+                    kemu1 += kemu+" ";
+                    console.log(kemu);
+                    console.log(data[i].teacherHope.length);
+
+                }
+                /*for(int i=(pageIndex-1)*pageSize,j=0;i<pageIndex*pageSize;i++,j++)*/
+
+                console.log(kemu1);
+                var tr =
+                    '<li>'
+                    + '<div class="z_jyk_t fl">'
+                    + ' <img src="http://zhishanshi.com/static/pc/images/Demo_Big.jpg" alt="">'
+                    + '<div>' +
+                    /*   +  '<h3>'+data[0].t_name+'</h3>'
+                           +'<p>'+data[0].t_account+'</p>'+*/
+                    '</div>' +
+                    '</div>'
+                    + '<div>' +
+                    '<p>姓名：<i>' + data[i].t_name + '</i></p>' +
+                    '<p>账号：<i>' + data[i].t_account + '</i></p>' +
+                    '<p>就读/毕业高校：<i>' + data[i].t_workaddress + '</i></p>' +
+                    '<p>科目：<i>' + kemu1/*data[0].teacherHope[0].t_kemu*/ + '</i></p>' +
+                    '<p>性别：<i>' + data[i].t_sex + '</i></p>' +
+                    '<p>年龄：<i>' + data[i].t_age + '</i></p>' +
+                    "<td><a href='FteacherDetail.html'>" + "查看详情" + "</a></td>"
+                    + '</div>'
+                    + "</li><br></<br>"
+
+
+                trs += tr;
+                $("#d_body").html(trs);
+
+
+            }
+            /*
+
+
+                  /
+                        var tr='<tr>'
+                                +'<td>'+"sfsfsf"+"</td>"
+                            +'<td>'+data.i.t_name+"</td>"
+                            +'<td>'+data.data[i].t_area+"</td>"
+                            +"<td>"+data.data[i].t_sex+"</td>"
+                            +"<td>"+data.data[i].t_subject+"</td>"
+                            +"<td>"+data.data[i].t_salary+"</td>"
+                            +"<td><a href="/teacher/search?id:">查看详情</a></td>"
+                            +"</tr>"
+                        trs += tr;
+                        $("#t_body").html(trs);
+                    }*/
+
+        };
+
+
+
+        //清空数据
+        function clearDate() {
+            $("#d_body").html("");
+        }
+
+        //首页
+        $("#firstPage").click(function () {
+            //var index=$("#index").val();
+            pageIndex = 1;
+            $("#index").val(pageIndex);
+            queryForPages();
+        });
+        //上一页
+        $("#previous").click(function () {
+            if (pageIndex > 1) {
+                pageIndex--;
+            }
+            $("#index").val(pageIndex);
+            queryForPages();
+        });
+        //下一页
+        $("#next").click(function () {
+            if (pageIndex < totalPageCount) {
+                pageIndex++;
+
+            }
+            console.log(totalPageCount,"33333");
+            console.log(pageIndex,pageSize,"2222");
+            $("#index").val(pageIndex);
+            clearDate();
+            queryForPages();
+        });
+        //尾页
+        $("#last").click(function () {
+            pageIndex = totalPageCount;
+            $("#index").val(pageIndex);
+            queryForPages();
+        });
+    });
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+
+    .container {
+        width: 90%;
+        border: 1px solid #999;
+        margin: 0px auto;
+        margin: 80px
+    }
+
+    .container > div {
+        float: left
+    }
+
+    .container:after {
+        content: '';
+        display: block;
+        clear: both
+    }
+
+    .left {
+        width: 24%;
+        border: 1px solid #f40000
+    }
+
+    .right {
+        width: 70%;
+        border: 1px solid rgba(255, 255, 255, .5)
+    }
+
+    .tb {
+        width: 1050px
+    }
+
+    .tb th {
+        background-color: #108ee9;
+        color: #fff
+    }
+
+    .tb tr {
+        height: 40px;
+        line-height: 40px;
+        text-align: center
+    }
+
+    .tb tr:hover {
+        background: #9af5ff
+    }
+
+    h2 {
+        text-align: center
+    }
+
+    img {
+        width: 130px;
+        height: 175px;
+    }
+
+    .page {
+        margin-left: 35%;
+        margin-top: 10px;
+        background-color: #f0f0f0;
+        width: 297px;
+    }
+
+    #index {
+        text-align: center;
+        border: none;
+        font-weight: bold
+    }
+    /* www.divcss5.com CSS下拉菜单实例 */
+
+
+    #nav{line-height: 24px;  list-style-type: none; background:#666}
+
+    #nav a{display: block; width: 80px; text-align:center}
+
+    #nav a:link {color:#666; text-decoration:none}
+    #nav a:visited {color:#666;text-decoration:none}
+    #nav a:hover {color:#FFF;text-decoration:none;font-weight:bold}
+
+    #nav li{float: left; width: 80px; background:#CCC}
+    #nav li a:hover{ background:#999}
+    #nav li ul{line-height: 27px;  list-style-type: none;text-align:left;left: -999em; width: 180px; position: absolute}
+    #nav li ul li{float: left; width: 180px;background:#EFEFEF}
+
+    #nav li ul a{display: block; width: 156px;text-align:left;padding-left:24px; overflow:hidden}
+
+    #nav li ul a:link {color:#666; text-decoration:none}
+    #nav li ul a:visited {color:#666;text-decoration:none}
+    #nav li ul a:hover {color:#F3F3F3;text-decoration:none;font-weight:normal;background:#C00}
+
+    #nav li:hover ul{left: auto}
+    #nav li.sfhover ul{left: auto}
+    #content{clear: left}
+</style>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Directive</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+		<script src="/js/skel.min3.js"></script>
+		<script src="/js/init3.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel3.css" />
+			<link rel="stylesheet" href="css/style3.css" />
+			<link rel="stylesheet" href="css/style-wide3.css" />
+		</noscript>
+	</head>
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			$.ajax({
+				type: "get",
+				url: "teacher/findByt_account",
+				dataType: "json", //返回数据类型
+				contentType: 'application/json',
+				success: function (data) {
+					$("#t_account").text(data.t_account);
+					$("#t_age").text(data.t_age);
+					$("#t_name").text(data.t_name);
+					$("#t_sex").text(data.t_sex);
+					$("#t_school").text(data.t_school);
+					$("#t_phone").text(data.t_phone);
+					$("#t_workaddress").text(data.t_workaddress);
+				}
+			});
+		})
+	</script>
+	<body>
+
+		<!-- Header -->
+			<div id="header">
+				<span class="logo icon fa-paper-plane-o" id="start"></span>
+				<h1>个人中心</h1>
+				<br />
+				驾驭命运的舵是奋斗。不抱有一丝幻想，不放弃一点机会，不停止一日努力。</p>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+			  <div class="box alt container">
+				  <section class="feature left">
+						<a href='teachersearch.html#end' class="image icon fa-signal"><img src="/img/999.jpg"></a>
+						<div class="content">
+							<h3>The First Thing</h3>
+							<td>账号 | <i id="t_account"></i></td><br>
+							<td>姓名 | <i id="t_name"></i></td><br>
+						    <td>年龄 | <i id="t_age"></i></td><br>
+						    <td>性别 | <i id="t_sex"></i></td><br>
+						</div>
+					</section>
+					<section class="feature right">
+						<a href='teachersearch.html#start' class="image icon fa-code"><img src="img/555.jpg"></a>
+						<div class="content">
+							<h3>The Second Thing</h3>
+							<td><i id="t_school"></i> | 学校</td><br>
+						    <td><i id="t_workaddress"></i> | 地址</td><br>
+						    <td><i id="t_phone"></i> | 联系电话</td><br>
+						</div>
+					</section>	
+				</div>
+				<footer class="major container small">
+					<ul class="actions" id="end">
+						<li><a href="teacherupdate.html" class="button">更新信息</a></li>
+                        <li><a href="#" class="button">返回</a></li>
+					</ul>
+				</footer>
+
+			</div>
+
+	</body>
+</html>

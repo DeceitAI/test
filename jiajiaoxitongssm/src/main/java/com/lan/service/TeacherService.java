@@ -29,8 +29,8 @@ public interface TeacherService {
 
     /**
      * 老师图片上传
-     * @param image
+     * @param teacher
      * @return
      */
-    public String SaveImage(String image);
+    public int SaveImage(Teacher teacher);
 }

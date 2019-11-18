@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Directive</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="/js/jquery.min3.js"></script>
+		<script src="/js/skel.min3.js"></script>
+		<script src="/js/init3.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel3.css" />
+			<link rel="stylesheet" href="css/style3.css" />
+			<link rel="stylesheet" href="css/style-wide3.css" />
+		</noscript>
+	</head>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $.ajax({
+                type: "get",
+                url: "teacher/findByt_account",
+                dataType: "json", //返回数据类型
+                contentType: 'application/json',
+                success: function (data) {
+                    $("#t_account").val(data.t_account);
+                    $("#t_age").val(data.t_age);
+                    $("#t_name").val(data.t_name);
+                    $("#t_sex").val(data.t_sex);
+                    $("#t_school").val(data.t_school);
+                    $("#t_phone").val(data.t_phone);
+                    $("#t_workaddress").val(data.t_workaddress);
+					$("#t_password").val(data.t_password);
+                }
+            });
+        })
+    </script>
+    <script type="text/javascript">
+
+        //修改用户信息
+        function Finish() {
+            var t_name = $("#t_name").val();
+            var t_age = $("#t_age").val();
+            var t_sex = $("#t_sex").val();
+            var t_phone = $("#t_phone").val();
+            var t_school = $("#t_school").val();
+            var t_workaddress = $("#t_workaddress").val();
+			var t_password = $("#t_password").val();
+            var data = {
+                "t_name":t_name,
+                "t_age":t_age,
+                "t_sex":t_sex,
+                "t_phone":t_phone,
+                "t_school":t_school,
+                "t_workaddress":t_workaddress,
+				"t_password":t_password,
+            }
+            $.ajax({
+                type: "post",
+                url: "teacher/UpdateTeacher",
+                data: JSON.stringify(data),
+                dataType: "json", //返回数据类型
+                contentType: 'application/json',
+                success: function (data) {
+                    if("success" == data.type){
+                        window.location.href="TeacherDetail.html";
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                },
+                error:function () {
+                    alert("修改不成功")
+                }
+
+            });
+        }
+    </script>
+	<body>
+
+		<!-- Header -->
+			<div id="header">
+				<span class="logo icon fa-paper-plane-o" id="start"></span>
+				<h1>更新信息</h1>
+				<br />
+				只要路是对的，就不害怕遥远。只要认准是值得的，就不在乎沧桑变化。</p>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+			  <div class="box alt container">
+				  <section class="feature left">
+						<a href='teacherupdate.html#end' class="image icon fa-signal"><img src="img/999.jpg"></a>
+						<div class="content">
+							<h3>The First Thing</h3>
+							<td>姓名 | <input id="t_name" name="t_name" type="text" placeholder="请输入修改姓名"></td>
+                            <td>年龄 | <input id="t_age" name="t_age" type="text" placeholder="请输入修改年龄"></td>
+						    <td>性别 | <input id="t_sex" name="t_sex" type="text" placeholder="请输入修改性别"></input></td>
+						</div>
+					</section>
+					<section class="feature right">
+						<a href='teacherupdate.html#start' class="image icon fa-code"><img src="img/555.jpg"></a>
+						<div class="content">
+							<h3>The Second Thing</h3>
+							<td>学校 |<input id="t_school" name="t_school" type="text" placeholder="请输入修改学校"></input></td>
+						    <td>地址 |<input id="t_workaddress" name="t_workaddress" type="text" placeholder="请输入修改地址"></input></td>
+						    <td>联系电话 |<input id="t_phone" name="t_phone" type="text" placeholder="请输入修改号码"></input></td>
+							<td>密码 |<input id="t_password" name="t_password" type="password" placeholder="请输入修改密码"></input></td>
+						</div>
+					</section>	
+				</div>
+				<footer class="major container small">
+					<ul class="actions" id="end">
+						<input id="finish" onclick="Finish()" type="button" value="保存">
+                        <li><a href="teachersearch.html" class="button">返回</a></li>
+					</ul>
+				</footer>
+
+			</div>
+
+	</body>
+</html>

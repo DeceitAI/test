@@ -28,6 +28,32 @@
   <!--//fonts-->
 </head>
 
+<<<<<<< HEAD:jiajiaoxitongssm/target/jiajiaoxitongssm-1.0-SNAPSHOT/Personal.html
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $.ajax({
+      type: "get",
+      url: "student/findBys_account",
+      dataType: "json", //返回数据类型
+      contentType: 'application/json',
+      success: function (data) {
+          $("#s_name").val(data.s_name);
+          $("#s_age").val(data.s_age);
+          $("#s_sex").val(data.s_sex);
+          $("#s_phone").val(data.s_phone);
+          $("#s_school").val(data.s_school);
+          $("#s_class").val(data.s_class);
+          $("#s_address").val(data.s_address);
+      }
+
+    });
+  })
+</script>
+
+=======
+>>>>>>> 155128394dc875407a427e80f2321e8cd94c2383:zqn/个人中心1.0/search.html
 <body>
   <header>
     <h1>个人中心</h1>
